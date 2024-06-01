@@ -1,0 +1,68 @@
+.navbar-custom {
+    background-color: #a9a9a9;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .nav-dropdown {
+    color: white;
+}
+
+body {
+    background-color: #a9a9a9; /* Light grey background color */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.hero-section {
+    background-color: #343a40;
+    color: white;
+    border-radius: 20px;
+    padding: 40px 20px;
+    margin: 20px auto; /* Center horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the text */
+    max-width: 80%; /* Adjust width as needed */
+}
+
+.profile-img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.custom-nav-pills .nav-item {
+    flex: 1;
+}
+
+.custom-nav-pills .nav-link {
+    border-radius: 50px;
+    margin: 0 5px;
+    color: white;
+    background: #2c2c2c; /* Default color for tabs */
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.custom-nav-pills .nav-link.active {
+    background: #dc143c; /* Tomato color for active tab */
+    color: white;
+}
+
+.custom-pill-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Add some margin to the top */
+}
+
+.content-section {
+    background-color: #343a40; /* Match the grey box color */
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px auto; /* Center horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 80%; /* Adjust width as needed */
+    text-align: left;
+}
