@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juan Carlos Mendoza — Staff Security Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0d0b14;
+      --bg-card:  #13111f;
+      --bg-hover: #1a1730;
+      --purple:   #7c3aed;
+      --purple-l: #a78bfa;
+      --purple-ll:#c4b5fd;
+      --text:     #ddd6fe;
+      --muted:    #7c6fa0;
+      --white:    #f5f3ff;
+      --border:   rgba(124,58,237,0.18);
+      --radius:   6px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,11,20,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      height: 56px; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 1rem;
+      color: var(--white); letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--purple-l); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.8rem; font-weight: 500;
+      color: var(--muted); transition: color 0.2s;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--purple-l); }
+
+    /* WRAPPER */
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+
+    /* HERO */
+    #hero {
+      padding: 120px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple-l); margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800; color: var(--white);
+      letter-spacing: -0.03em; line-height: 1.05;
+      margin-bottom: 0.5rem;
+    }
+    .hero-title {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--purple-ll);
+      background: rgba(124,58,237,0.12);
+      border: 1px solid rgba(124,58,237,0.35);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-summary {
+      font-size: 0.95rem; color: var(--text);
+      max-width: 580px; line-height: 1.75;
+      margin-bottom: 1.75rem; opacity: 0.85;
+    }
+    .hero-contacts { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .hero-contact {
+      font-size: 0.78rem; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .hero-contact:hover { color: var(--purple-l); }
+    .hero-contact-label {
+      font-size: 0.62rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--purple); margin-bottom: 0.1rem;
+    }
+
+    /* TWO-PANEL BODY */
+    #main {
+      max-width: 1060px; margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* LEFT — Skills */
+    .skills-panel {
+      border-right: 1px solid var(--border);
+      padding: 3rem 2rem 3rem 0;
+    }
+    .panel-heading {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    }
+    .skill-group { margin-bottom: 1.4rem; }
+    .skill-group-name {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .skill-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; padding: 0.2rem 0.5rem;
+      background: rgba(124,58,237,0.08);
+      border: 1px solid var(--border);
+      color: var(--purple-ll); border-radius: 3px;
+    }
+
+    /* RIGHT — Experience */
+    .exp-panel {
+      padding: 3rem 0 3rem 2.5rem;
+    }
+    .exp-item { margin-bottom: 2.5rem; position: relative; padding-left: 1rem; }
+    .exp-item::before {
+      content: ''; position: absolute; left: 0; top: 6px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--purple); flex-shrink: 0;
+    }
+    .exp-role {
+      font-size: 0.92rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.15rem;
+    }
+    .exp-company {
+      font-size: 0.8rem; color: var(--purple-l);
+      font-weight: 500; margin-bottom: 0.15rem;
+    }
+    .exp-meta {
+      font-size: 0.7rem; color: var(--muted); margin-bottom: 0.6rem;
+    }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+    .exp-bullets li {
+      font-size: 0.8rem; color: var(--text);
+      line-height: 1.6; padding-left: 1rem; position: relative; opacity: 0.85;
+    }
+    .exp-bullets li::before {
+      content: '›'; position: absolute; left: 0;
+      color: var(--purple); font-size: 0.9rem;
+    }
+
+    /* PROJECTS */
+    #projects { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+    .section-heading {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 1.75rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .project-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: var(--purple); }
+    .project-name {
+      font-size: 0.88rem; font-weight: 700; color: var(--white);
+      margin-bottom: 0.35rem;
+    }
+    .project-stack {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; color: var(--purple-l); margin-bottom: 0.6rem;
+    }
+    .project-desc { font-size: 0.78rem; color: var(--text); line-height: 1.6; opacity: 0.85; }
+
+    /* BEYOND */
+    #beyond { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+    .hobby-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .hobby-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.1rem 1rem;
+    }
+    .hobby-icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .hobby-name {
+      font-size: 0.8rem; font-weight: 600; color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .hobby-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.55; }
+
+    /* CONTACT */
+    #contact { padding: 4rem 0 5rem; }
+    .contact-inner { max-width: 520px; }
+    .contact-intro {
+      font-size: 0.88rem; color: var(--text); opacity: 0.8;
+      margin-bottom: 1.5rem; line-height: 1.7;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.82rem; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--purple-l); }
+    .contact-link-icon { color: var(--purple); font-size: 1rem; width: 18px; }
+    form { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    input, textarea {
+      width: 100%;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--white); font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; padding: 0.65rem 0.9rem;
+      border-radius: var(--radius); outline: none; transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { border-color: var(--purple); }
+    textarea { resize: vertical; min-height: 120px; }
+    .btn-send {
+      align-self: flex-start;
+      background: var(--purple); color: #fff;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem;
+      font-weight: 600; padding: 0.65rem 1.5rem;
+      border: none; border-radius: var(--radius);
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-send:hover { opacity: 0.85; }
+    .form-msg { font-size: 0.78rem; color: var(--purple-l); margin-top: 0.25rem; display: none; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      text-align: center;
+      font-size: 0.72rem; color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      #main { grid-template-columns: 1fr; }
+      .skills-panel { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 0; }
+      .exp-panel { padding: 2rem 0; }
+      .project-grid { grid-template-columns: 1fr 1fr; }
+      .hobby-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .project-grid, .hobby-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+    }
+
+    /* FADE-IN */
+    .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JC<span>M</span>.</div>
+  <div class="nav-links">
+    <a href="#main">Skills</a>
+    <a href="#main">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Staff Security Engineer &nbsp;·&nbsp; Python &nbsp;·&nbsp; AI &amp; Automation</div>
+    <div class="hero-name">Juan Carlos<br>Mendoza</div>
+    <div class="hero-title">Open to new opportunities</div>
+    <p class="hero-summary">
+      5+ years building AI-powered security tools, cloud automation, and developer platforms in enterprise environments.
+      I specialize in turning complex security problems into clean, scalable solutions.
+    </p>
+    <div class="hero-contacts">
+      <div>
+        <div class="hero-contact-label">Email</div>
+        <a class="hero-contact" href="mailto:juanmendoza0309@gmail.com">juanmendoza0309@gmail.com</a>
+      </div>
+      <div>
+        <div class="hero-contact-label">LinkedIn</div>
+        <a class="hero-contact" href="https://linkedin.com/in/mendozajua" target="_blank">linkedin.com/in/mendozajua</a>
+      </div>
+      <div>
+        <div class="hero-contact-label">Phone</div>
+        <a class="hero-contact" href="tel:5094390227">(509) 439-0227</a>
+      </div>
+      <div>
+        <div class="hero-contact-label">Resume</div>
+        <a class="hero-contact" href="resume.pdf" download>Download PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TWO-PANEL: SKILLS + EXPERIENCE -->
+<div id="main">
+  <!-- LEFT -->
+  <aside class="skills-panel">
+    <div class="panel-heading">Skills</div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Bash</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Groovy</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">AI &amp; Agents</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS Bedrock</span>
+        <span class="skill-tag">MCP Protocol</span>
+        <span class="skill-tag">AI Agent Dev</span>
+        <span class="skill-tag">LLM Integration</span>
+        <span class="skill-tag">Prompt Eng.</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Cloud &amp; DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Lambda</span>
+        <span class="skill-tag">ECS</span>
+        <span class="skill-tag">EC2</span>
+        <span class="skill-tag">Fargate</span>
+        <span class="skill-tag">S3</span>
+        <span class="skill-tag">Jenkins</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">CI/CD</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Security</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SDElements</span>
+        <span class="skill-tag">Contrast</span>
+        <span class="skill-tag">Splunk</span>
+        <span class="skill-tag">Authelia</span>
+        <span class="skill-tag">Vuln Mgmt</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Data &amp; Automation</div>
+      <div class="skill-tags">
+        <span class="skill-tag">ETL Pipelines</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Postman</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Proxmox</span>
+        <span class="skill-tag">NGINX</span>
+        <span class="skill-tag">Cloudflare</span>
+        <span class="skill-tag">VLANs</span>
+        <span class="skill-tag">Kubernetes</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT -->
+  <main class="exp-panel">
+    <div class="panel-heading">Experience</div>
+
+    <div class="exp-item fade">
+      <div class="exp-role">Staff Security Engineer</div>
+      <div class="exp-company">FINRA</div>
+      <div class="exp-meta">2025 – Present &nbsp;·&nbsp; Remote</div>
+      <ul class="exp-bullets">
+        <li>Built an AWS Bedrock-powered app that scans code for vulnerabilities, delivering AI-driven analysis to dev teams.</li>
+        <li>Integrated MCP tooling into security workflows, meaningfully improving day-to-day productivity.</li>
+        <li>Built custom AI agents for security functions, leveraging MCP to automate repetitive tasks.</li>
+        <li>Led adoption of an SDElements MCP integration that auto-scans 500+ app repositories.</li>
+        <li>Consistently achieved 90%+ quarterly survey completion through process automation.</li>
+        <li>Refactored and stabilized the SDElements codebase, transforming a fragile system into a reliable platform.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item fade">
+      <div class="exp-role">Cybersecurity Engineer</div>
+      <div class="exp-company">FINRA</div>
+      <div class="exp-meta">Nov 2022 – 2025 &nbsp;·&nbsp; Remote</div>
+      <ul class="exp-bullets">
+        <li>Optimized Lambda ETL pipelines, improving throughput by 50%.</li>
+        <li>Improved Jenkins CI/CD pipelines, reducing deploy time by 50%.</li>
+        <li>Reduced reporting overhead by 70% for a 1,400-person department.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item fade">
+      <div class="exp-role">Full Stack Developer</div>
+      <div class="exp-company">Revature</div>
+      <div class="exp-meta">Apr 2021 – Dec 2022</div>
+      <ul class="exp-bullets">
+        <li>Built and deployed full-stack web apps using Java, Spring Boot, and React.</li>
+        <li>Worked in Agile teams delivering client-facing features on tight timelines.</li>
+      </ul>
+    </div>
+
+    <div class="panel-heading" style="margin-top: 2rem;">Education &amp; Certs</div>
+
+    <div class="exp-item fade">
+      <div class="exp-role">B.S. Computer Science</div>
+      <div class="exp-company">Washington State University</div>
+      <div class="exp-meta">Minor in Statistics &nbsp;·&nbsp; 2020</div>
+    </div>
+
+    <div class="exp-item fade">
+      <div class="exp-role">AWS Certified Cloud Practitioner</div>
+      <div class="exp-company">Amazon Web Services</div>
+    </div>
+
+    <div class="exp-item fade">
+      <div class="exp-role">AWS Certified Solutions Architect – Associate</div>
+      <div class="exp-company">Amazon Web Services</div>
+    </div>
+  </main>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-heading">Personal Projects</div>
+    <div class="project-grid" style="grid-template-columns: 1fr;">
+
+      <div class="project-card fade">
+        <div class="project-name">Self-Hosted Homelab</div>
+        <div class="project-stack">Proxmox · Docker · NGINX · VLANs · Cloudflare</div>
+        <p class="project-desc">Private infrastructure running Proxmox VMs, self-hosted git, VLAN-segmented networking, and internal services — all managed from home. Includes containerized apps, reverse proxying, and internal DNS.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND -->
+<section id="beyond">
+  <div class="wrap">
+    <div class="section-heading">Beyond Work</div>
+    <div class="hobby-grid">
+
+      <div class="hobby-card fade">
+        <div class="hobby-icon">🐍</div>
+        <div class="hobby-name">Reptiles</div>
+        <div class="hobby-desc">Two ball pythons, a corn snake, a leopard gecko, and a bearded dragon. Each one with a distinct personality.</div>
+      </div>
+
+      <div class="hobby-card fade">
+        <div class="hobby-icon">🖨️</div>
+        <div class="hobby-name">3D Printing</div>
+        <div class="hobby-desc">Designing and printing custom parts, enclosures, and whatever rabbit hole I fall into that week.</div>
+      </div>
+
+      <div class="hobby-card fade">
+        <div class="hobby-icon">🖥️</div>
+        <div class="hobby-name">Homelab</div>
+        <div class="hobby-desc">Self-hosted infrastructure on Proxmox — a personal playground for networking, automation, and new tech.</div>
+      </div>
+
+      <div class="hobby-card fade">
+        <div class="hobby-icon">⚓</div>
+        <div class="hobby-name">One Piece</div>
+        <div class="hobby-desc">Fan since childhood. Still going strong after 1,000+ chapters. The crew > everything.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-heading">Contact</div>
+    <div class="contact-inner">
+      <p class="contact-intro">Open to new roles in security engineering, AI automation, or platform engineering. Feel free to reach out directly.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:juanmendoza0309@gmail.com">
+          <span class="contact-link-icon">✉</span> juanmendoza0309@gmail.com
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/mendozajua" target="_blank">
+          <span class="contact-link-icon">in</span> linkedin.com/in/mendozajua
+        </a>
+        <a class="contact-link" href="tel:5094390227">
+          <span class="contact-link-icon">☎</span> (509) 439-0227
+        </a>
+      </div>
+
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button type="submit" class="btn-send">Send Message</button>
+        <div class="form-msg" id="form-msg">Message sent — I'll get back to you soon.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Juan Carlos Mendoza &nbsp;·&nbsp; Staff Security Engineer &nbsp;·&nbsp; <a href="resume.pdf" download style="color:var(--purple-l);text-decoration:none;">Download Resume</a></div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  // Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    msg.style.display = 'block';
+    e.target.reset();
+  }
+</script>
+</body>
+</html>
