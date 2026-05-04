@@ -39,8 +39,11 @@
       background: rgba(13,11,20,0.96);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
-      height: 56px; padding: 0 2rem;
-      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
       font-weight: 800; font-size: 1rem;
@@ -56,14 +59,14 @@
     .nav-links a:hover { color: var(--purple-l); }
 
     /* WRAPPER */
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
 
     /* HERO */
     #hero {
       padding: 120px 0 64px;
       border-bottom: 1px solid var(--border);
     }
-    .hero-inner { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+    .hero-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
     .hero-eyebrow {
       font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--purple-l); margin-bottom: 1rem;
@@ -103,8 +106,8 @@
 
     /* TWO-PANEL BODY */
     #main {
-      max-width: 1060px; margin: 0 auto; padding: 0 2rem;
-      display: grid; grid-template-columns: 220px 1fr;
+      max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 260px 1fr;
       gap: 0;
       border-bottom: 1px solid var(--border);
     }
@@ -272,12 +275,14 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">JC<span>M</span>.</div>
-  <div class="nav-links">
-    <a href="#main">Skills</a>
-    <a href="#main">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+  <div class="nav-inner">
+    <div class="nav-logo">JC<span>M</span>.</div>
+    <div class="nav-links">
+      <a href="#main">Skills</a>
+      <a href="#main">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
 </nav>
 
